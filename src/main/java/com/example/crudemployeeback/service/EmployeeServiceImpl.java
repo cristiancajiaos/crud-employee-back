@@ -3,6 +3,8 @@ package com.example.crudemployeeback.service;
 import com.example.crudemployeeback.entity.Employee;
 import com.example.crudemployeeback.record.EmployeeDTO;
 import com.example.crudemployeeback.repository.EmployeeRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     this.employeeRepository = employeeRepository;
   }
 
+
+  @Override
+  public List<EmployeeDTO> getAllEmployees() {
+    return employeeRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+  }
 
   @Override
   public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
