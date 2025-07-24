@@ -4,6 +4,7 @@ import com.example.crudemployeeback.entity.Employee;
 import com.example.crudemployeeback.record.EmployeeDTO;
 import com.example.crudemployeeback.repository.EmployeeRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     Employee employee = convertToEntity(employeeDTO);
     Employee savedEmployee = employeeRepository.save(employee);
     return convertToDTO(savedEmployee);
+  }
+
+  @Override
+  public Optional<EmployeeDTO> getEmployeeById(Long id) {
+    return employeeRepository.findById(id).map(this::convertToDTO);
   }
 
   private Employee convertToEntity(EmployeeDTO employeeDTO) {
