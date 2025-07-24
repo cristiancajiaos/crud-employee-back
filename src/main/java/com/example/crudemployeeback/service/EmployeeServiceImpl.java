@@ -38,6 +38,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.findById(id).map(this::convertToDTO);
   }
 
+  @Override
+  public EmployeeDTO deleteEmployee(Long id) {
+    Employee foundEmployee = employeeRepository.findById(id).orElseThrow();
+    employeeRepository.deleteById(id);
+    return convertToDTO(foundEmployee);
+  }
+
   private Employee convertToEntity(EmployeeDTO employeeDTO) {
     Employee employee = new Employee();
     employee.setId(employeeDTO.id());

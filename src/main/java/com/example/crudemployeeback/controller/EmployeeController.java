@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,18 @@ public class EmployeeController {
   }
 
   @PostMapping
-  public EmployeeDTO createUser(@RequestBody EmployeeDTO employeeDTO) {
+  public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
     return employeeService.createEmployee(employeeDTO);
+  }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable Long id) {
+    try {
+       EmployeeDTO deletedEmployee = employeeService.deleteEmployee(id);
+       return ResponseEntity.ok(deletedEmployee);
+    } catch (Exception e) {
+      System.err.println("Error: " + e);
+      return ResponseEntity.notFound().build();
+    }
   }
 }
