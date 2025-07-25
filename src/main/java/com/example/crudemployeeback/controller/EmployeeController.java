@@ -1,6 +1,5 @@
 package com.example.crudemployeeback.controller;
 
-import com.example.crudemployeeback.entity.Employee;
 import com.example.crudemployeeback.record.EmployeeDTO;
 import com.example.crudemployeeback.service.EmployeeService;
 import java.util.List;
