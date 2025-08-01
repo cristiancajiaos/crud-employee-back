@@ -2,8 +2,10 @@ package com.example.crudemployeeback.controller;
 
 import com.example.crudemployeeback.record.CategoryDTO;
 import com.example.crudemployeeback.service.CategoryService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +26,10 @@ public class CategoryController {
   @PostMapping("")
   public CategoryDTO createCategory(@RequestBody CategoryDTO categoryDTO) {
     return categoryService.createCategory(categoryDTO);
+  }
+
+  @GetMapping("")
+  public List<CategoryDTO> getAllCategories() {
+    return categoryService.getAllCategories();
   }
 }

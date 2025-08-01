@@ -4,6 +4,8 @@ import com.example.crudemployeeback.entity.Category;
 import com.example.crudemployeeback.record.CategoryDTO;
 import com.example.crudemployeeback.repository.CategoryRepository;
 import com.example.crudemployeeback.service.CategoryService;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class CategoryServiceImpl implements CategoryService {
     Category category = convertToEntity(categoryDTO);
     Category savedCategory = categoryRepository.save(category);
     return convertToDTO(savedCategory);
+  }
+
+  @Override
+  public List<CategoryDTO> getAllCategories() {
+    return categoryRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
   }
 
   private Category convertToEntity(CategoryDTO categoryDTO) {
