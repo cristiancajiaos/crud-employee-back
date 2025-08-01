@@ -39,6 +39,14 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
+  public CategoryDTO updateCategory(CategoryDTO categoryDTO, Long categoryId) {
+    Category foundCategory = categoryRepository.findById(categoryId).orElseThrow();
+    foundCategory.setName(categoryDTO.name());
+    Category updatedCategory = categoryRepository.save(foundCategory);
+    return convertToDTO(updatedCategory);
+  }
+
+  @Override
   public CategoryDTO deleteCategory(Long categoryId) {
     Category foundCategory = categoryRepository.findById(categoryId).orElseThrow();
     categoryRepository.deleteById(categoryId);
