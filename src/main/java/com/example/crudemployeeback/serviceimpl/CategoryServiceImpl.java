@@ -38,6 +38,13 @@ public class CategoryServiceImpl implements CategoryService {
     return categoryRepository.findById(categoryId).map(this::convertToDTO);
   }
 
+  @Override
+  public CategoryDTO deleteCategory(Long categoryId) {
+    Category foundCategory = categoryRepository.findById(categoryId).orElseThrow();
+    categoryRepository.deleteById(categoryId);
+    return convertToDTO(foundCategory);
+  }
+
   private Category convertToEntity(CategoryDTO categoryDTO) {
     Category category = new Category();
     category.setId(categoryDTO.id());

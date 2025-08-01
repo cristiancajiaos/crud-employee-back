@@ -12,4 +12,6 @@ public interface CategoryService {
 
   Optional<CategoryDTO> getCategoryById(Long categoryId);
 
+  CategoryDTO deleteCategory(Long categoryId);
+
 }
